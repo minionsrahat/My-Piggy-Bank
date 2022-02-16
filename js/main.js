@@ -1,4 +1,3 @@
-
 function validation(elementClass){
     let flag=0;
     document.querySelectorAll('.'+elementClass).forEach(element => {
@@ -8,7 +7,7 @@ function validation(elementClass){
             element.nextElementSibling.innerText="This is required field. It can not be empty"
             element.nextElementSibling.classList.remove('d-none');  
         }
-       else if(isNaN(parseInt(element.value)))
+       else if(isNaN(element.value))
         {
             element.nextElementSibling.innerText=elementClass+" Can not be a String"
             element.nextElementSibling.classList.remove('d-none');
@@ -50,6 +49,11 @@ function calculateExpense(){
             document.getElementById('total-expense').innerText=totalExpense;
             document.getElementById('total-balance').innerText=totalIncome-totalExpense;
         }
+    }
+    else
+    {
+        document.getElementById('total-expense').innerText="";
+        document.getElementById('total-balance').innerText="";
     }
 
 }
