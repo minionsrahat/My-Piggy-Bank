@@ -2,6 +2,10 @@ body{
     margin: 0;
     padding: 0;
 }
+section{
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
 .title{
 font-family: Montserrat;
 font-style: normal;

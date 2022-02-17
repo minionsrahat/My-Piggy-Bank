@@ -12,7 +12,7 @@ function validation(elementClass){
             element.nextElementSibling.innerText=elementClass+" Can not be a String"
             element.nextElementSibling.classList.remove('d-none');
         }
-        else if(parseInt( element.value)<0)
+        else if(parseFloat(element.value)<0)
         {
             element.nextElementSibling.innerText=elementClass+" Can not be a negative number"
             element.nextElementSibling.classList.remove('d-none');
@@ -38,10 +38,10 @@ function calculateExpense(){
     if(!ExpenseError && !InomeError){
         let totalExpense=0;
         Array.prototype.slice.call(document.querySelectorAll('.expense')).map(element => {
-            totalExpense+=parseInt(element.value)
+            totalExpense+=parseFloat(element.value)
            
         });
-        let totalIncome=parseInt(document.getElementById('income').value)
+        let totalIncome=parseFloat(document.getElementById('income').value)
         if(totalExpense>totalIncome){
             alert("Expense can not be greater than Income")
         }
@@ -55,12 +55,56 @@ function calculateExpense(){
         document.getElementById('total-expense').innerText="";
         document.getElementById('total-balance').innerText="";
     }
+    calculateRemainingBalance() 
 
 }
 
 
+function calculateSavings() {
+    let SavingsError=validation('saving')
+
+    if(!SavingsError){
+        let totalSaving=parseFloat(document.querySelector('.saving').value);
+        let totalIncome=parseFloat(document.getElementById('income').value)
+        let totalBalance=parseFloat(document.getElementById('total-balance').innerText)
+        totalSaving=parseInt((totalSaving/100)*totalIncome);
+       
+        if(totalSaving>totalBalance){
+            document.getElementById('total-saving').innerText="0";
+            alert("Sorry you havent enough money for saving "+totalSaving+" taka")
+            
+        }
+        else{
+            document.getElementById('total-saving').innerText=totalSaving;
+            
+        }
+    }
+    else
+    {
+        document.getElementById('total-saving').innerText="0";
+      
+    }
+    calculateRemainingBalance() 
+
+  }
+
+function calculateRemainingBalance() { 
+
+    let totalIncome=parseFloat(document.getElementById('income').value)
+   
+    let totalExpense=(document.getElementById('total-expense').innerText)
+    totalExpense=parseFloat(totalExpense==""?0:totalExpense);
+   
+    let totalSaving=(document.getElementById('total-saving').innerText)
+    totalSaving=parseFloat(totalSaving==""?0:totalSaving);
+  
+    document.getElementById('total-remaining').innerText=totalIncome-(totalExpense+totalSaving)
+ }
+
+document.querySelector('.calculate-btn').addEventListener('click',calculateExpense);
+document.querySelector('.save-btn').addEventListener('click',calculateSavings);
 
 
-document.querySelector('.calculate-btn').addEventListener('click',()=>{
-    calculateExpense()
-});
+// calculateExpense()
+
+console.log(10>parseFloat(''));
