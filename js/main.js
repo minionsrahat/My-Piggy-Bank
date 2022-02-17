@@ -54,7 +54,9 @@ function calculateExpense(){
         });
         let totalIncome=parseFloat(document.getElementById('income').value)
         if(totalExpense>totalIncome){
-            alert("Expense can not be greater than Income")
+            alert("You Havent enough money .Expense can not be greater than Income")
+            document.getElementById('total-expense').innerText="";
+            document.getElementById('total-balance').innerText="";
         }
         else{
             document.getElementById('total-expense').innerText=totalExpense;
