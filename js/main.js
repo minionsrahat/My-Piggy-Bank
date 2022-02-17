@@ -55,6 +55,7 @@ function calculateExpense(){
         document.getElementById('total-expense').innerText="";
         document.getElementById('total-balance').innerText="";
     }
+
     calculateRemainingBalance() 
 
 }
@@ -62,8 +63,8 @@ function calculateExpense(){
 
 function calculateSavings() {
     let SavingsError=validation('saving')
-
-    if(!SavingsError){
+    let InomeError=validation('income')
+    if(!SavingsError && !InomeError){
         let totalSaving=parseFloat(document.querySelector('.saving').value);
         let totalIncome=parseFloat(document.getElementById('income').value)
         let totalBalance=parseFloat(document.getElementById('total-balance').innerText)
@@ -72,6 +73,7 @@ function calculateSavings() {
         if(totalSaving>totalBalance){
             document.getElementById('total-saving').innerText="0";
             alert("Sorry you havent enough money for saving "+totalSaving+" taka")
+
             
         }
         else{
@@ -85,19 +87,24 @@ function calculateSavings() {
       
     }
     calculateRemainingBalance() 
+  }
 
+  function filterValue(node) {
+    return parseInt(node==""?0:node);
+      
   }
 
 function calculateRemainingBalance() { 
 
-    let totalIncome=parseFloat(document.getElementById('income').value)
-   
+    let totalIncome=(document.getElementById('income').value)
+    totalIncome=filterValue(totalIncome)
+
     let totalExpense=(document.getElementById('total-expense').innerText)
-    totalExpense=parseFloat(totalExpense==""?0:totalExpense);
-   
+    totalExpense=filterValue(totalExpense)
+
     let totalSaving=(document.getElementById('total-saving').innerText)
-    totalSaving=parseFloat(totalSaving==""?0:totalSaving);
-  
+    totalSaving=filterValue(totalSaving)
+
     document.getElementById('total-remaining').innerText=totalIncome-(totalExpense+totalSaving)
  }
 
